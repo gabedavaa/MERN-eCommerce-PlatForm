@@ -1,5 +1,5 @@
 import asyncHandler from '../middleware/asyncHandler.js';
-import User from '../models/orderModel.js';
+import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
 // @desc Auth user & get token
@@ -7,7 +7,6 @@ import generateToken from '../utils/generateToken.js';
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  console.log(email);
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
@@ -60,8 +59,10 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST/api/users/logout
 // @access Private
 const logoutUser = asyncHandler(async (req, res) => {
-  res.cookie('jwt', '', { httpOnly: true, expires: new Date(0) });
-
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
   res.status(200).json({ message: 'Logged out successfully' });
 });
 
@@ -101,10 +102,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     const updatedUser = await user.save();
 
     res.status(200).json({
-      _id: updateUser._id,
-      name: updateUser.name,
-      email: updateUser.email,
-      isAdmin: updateUser.isAdmin,
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
     });
   } else {
     res.status(404);
