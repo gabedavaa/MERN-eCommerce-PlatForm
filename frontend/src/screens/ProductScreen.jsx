@@ -13,12 +13,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Rating from '../components/Rating';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import Meta from '../components/Meta';
 import {
   useGetProductsDetailsQuery,
   useCreateReviewMutation,
 } from '../slices/productsApiSlice';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
 import { addToCart } from '../slices/cartSlice';
 
 const ProductScreen = () => {
@@ -76,6 +77,7 @@ const ProductScreen = () => {
         </Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
