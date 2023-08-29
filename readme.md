@@ -1,5 +1,8 @@
 # F-shop eCommerce Platform
 
+[Live URL](https://f-shop.onrender.com/)
+
+
 > eCommerce platform built with the MERN stack & Redux.
 
  
